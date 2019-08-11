@@ -25,5 +25,21 @@ module.exports = {
 
         return res.json(dev);
 
+    },
+
+    async index(req, res) {
+        const { user } = req.headers;
+
+        const loggedDev = await Dev.findById(user);
+
+        const users = await Dev.find({
+            $and: [
+                { _id: { $ne: user } }, // Usuario com o ID sera diferente de userLogado
+                { _id: { $nin: loggedDev.likes } }, //Usuario que já deram likes
+                { _id: { $nin: loggedDev.dislikes } }, //Usuario que receberam dislikes
+            ],
+        });
+
+        return res.json(users);
     }
 }
