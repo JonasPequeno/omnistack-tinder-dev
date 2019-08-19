@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const server = express();
 
@@ -11,11 +11,13 @@ mongoose.connect(
 );
 //bodyParser.urlencoded({ extended: false });
 //server.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
 //server.use(bodyParser.json())
-server.use(express.json());
-server.use(routes);
 
+//permitir o acesso do react
+server.use(cors());
+server.use(express.json());
+
+server.use(routes); 
 
 server.listen(3000, () => {
     console.log(`Servidor rodando`);
