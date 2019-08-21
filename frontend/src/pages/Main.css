@@ -68,3 +68,10 @@
     transition: all 0.03s;
 }
  
+
+.main-container .empty {
+    font-family: 32px;
+    color: #999;
+    font-weight: bold;
+    margin-top: 300px;
+}
